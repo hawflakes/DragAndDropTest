@@ -16,6 +16,7 @@
 		04384BCE154A99B1001223C0 /* DNDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04384BCD154A99B1001223C0 /* DNDViewController.m */; };
 		04384BD1154A99B1001223C0 /* DNDViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04384BCF154A99B1001223C0 /* DNDViewController_iPhone.xib */; };
 		04384BD4154A99B1001223C0 /* DNDViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04384BD2154A99B1001223C0 /* DNDViewController_iPad.xib */; };
+		04384BDC154AA1A8001223C0 /* DNDTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 04384BDB154AA1A8001223C0 /* DNDTile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,16 +24,18 @@
 		04384BBA154A99B1001223C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		04384BBC154A99B1001223C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04384BBE154A99B1001223C0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		04384BC2154A99B1001223C0 /* DragAndDrop-Info.plist */ = {isa = PBXFileReference; path = "DragAndDrop-Info.plist"; sourceTree = "<group>"; };
+		04384BC2154A99B1001223C0 /* DragAndDrop-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DragAndDrop-Info.plist"; sourceTree = "<group>"; };
 		04384BC4154A99B1001223C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		04384BC6154A99B1001223C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		04384BC8154A99B1001223C0 /* DragAndDrop-Prefix.pch */ = {isa = PBXFileReference; path = "DragAndDrop-Prefix.pch"; sourceTree = "<group>"; };
-		04384BC9154A99B1001223C0 /* DNDAppDelegate.h */ = {isa = PBXFileReference; path = DNDAppDelegate.h; sourceTree = "<group>"; };
+		04384BC8154A99B1001223C0 /* DragAndDrop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DragAndDrop-Prefix.pch"; sourceTree = "<group>"; };
+		04384BC9154A99B1001223C0 /* DNDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNDAppDelegate.h; sourceTree = "<group>"; };
 		04384BCA154A99B1001223C0 /* DNDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DNDAppDelegate.m; sourceTree = "<group>"; };
-		04384BCC154A99B1001223C0 /* DNDViewController.h */ = {isa = PBXFileReference; path = DNDViewController.h; sourceTree = "<group>"; };
+		04384BCC154A99B1001223C0 /* DNDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNDViewController.h; sourceTree = "<group>"; };
 		04384BCD154A99B1001223C0 /* DNDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DNDViewController.m; sourceTree = "<group>"; };
 		04384BD0154A99B1001223C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DNDViewController_iPhone.xib; sourceTree = "<group>"; };
 		04384BD3154A99B1001223C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DNDViewController_iPad.xib; sourceTree = "<group>"; };
+		04384BDA154AA1A8001223C0 /* DNDTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNDTile.h; sourceTree = "<group>"; };
+		04384BDB154AA1A8001223C0 /* DNDTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNDTile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,8 @@
 				04384BCA154A99B1001223C0 /* DNDAppDelegate.m */,
 				04384BCC154A99B1001223C0 /* DNDViewController.h */,
 				04384BCD154A99B1001223C0 /* DNDViewController.m */,
+				04384BDA154AA1A8001223C0 /* DNDTile.h */,
+				04384BDB154AA1A8001223C0 /* DNDTile.m */,
 				04384BCF154A99B1001223C0 /* DNDViewController_iPhone.xib */,
 				04384BD2154A99B1001223C0 /* DNDViewController_iPad.xib */,
 				04384BC1154A99B1001223C0 /* Supporting Files */,
@@ -169,6 +174,7 @@
 				04384BC7154A99B1001223C0 /* main.m in Sources */,
 				04384BCB154A99B1001223C0 /* DNDAppDelegate.m in Sources */,
 				04384BCE154A99B1001223C0 /* DNDViewController.m in Sources */,
+				04384BDC154AA1A8001223C0 /* DNDTile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

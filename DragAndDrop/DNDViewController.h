@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class DNDTile;
+
 @interface DNDViewController : UIViewController
+{
+    NSMutableArray * tiles;
+}
+
+@property (nonatomic) NSMutableArray * tiles;
+
+-(NSIndexPath *) tileIndexForPoint:(CGPoint) _point;
+-(DNDTile *) tileForIndexPath:(NSIndexPath *) _indexPath;
 
 @end
