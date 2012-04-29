@@ -3,7 +3,7 @@
 //  DragAndDrop
 //
 //  Created by Jack Tihon on 4/27/12.
-//  Copyright (c) 2012 Endorse. All rights reserved.
+//  Copyright (c) 2012 Jack Tihon. All rights reserved.
 //
 
 #import "DNDTile.h"
