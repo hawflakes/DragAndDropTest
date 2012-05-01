@@ -38,7 +38,7 @@
 
 - (void)setTapDelegate:(id<DNDTileTapDelegate>)newTapDelegate
 {
-    self.tapDelegate = newTapDelegate;
+    tapDelegate = newTapDelegate;
     UITapGestureRecognizer * tapRecog = [[UITapGestureRecognizer alloc] initWithTarget:tapDelegate action:@selector(didTapTile:)];
     [tapRecog setNumberOfTapsRequired:1];
     [tapRecog setNumberOfTouchesRequired:1];
