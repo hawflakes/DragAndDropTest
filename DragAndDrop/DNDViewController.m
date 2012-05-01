@@ -71,7 +71,8 @@ static CGSize TILESIZE;
     [self.view addSubview:[self backgrounGrid]];
     
     DNDTile * t = [[DNDTile alloc] initWithFrame:CGRectMake(5, 5, TILESIZE.width, TILESIZE.height)];
-    t.delegate = self;
+    t.locationDelegate = self;
+    t.draggingDelegate = t;
     t.moveable = YES;
     t.snapToGrid = YES;
     [self.view addSubview:t];
