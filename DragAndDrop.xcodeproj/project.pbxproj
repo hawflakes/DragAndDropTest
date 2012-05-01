@@ -17,6 +17,7 @@
 		04384BD1154A99B1001223C0 /* DNDViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04384BCF154A99B1001223C0 /* DNDViewController_iPhone.xib */; };
 		04384BD4154A99B1001223C0 /* DNDViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04384BD2154A99B1001223C0 /* DNDViewController_iPad.xib */; };
 		04384BDC154AA1A8001223C0 /* DNDTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 04384BDB154AA1A8001223C0 /* DNDTile.m */; };
+		04949BB215508935000C6D22 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 04949BB115508935000C6D22 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		04384BD3154A99B1001223C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DNDViewController_iPad.xib; sourceTree = "<group>"; };
 		04384BDA154AA1A8001223C0 /* DNDTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNDTile.h; sourceTree = "<group>"; };
 		04384BDB154AA1A8001223C0 /* DNDTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNDTile.m; sourceTree = "<group>"; };
+		04949BB115508935000C6D22 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		04384BC0154A99B1001223C0 /* DragAndDrop */ = {
 			isa = PBXGroup;
 			children = (
+				04949BB115508935000C6D22 /* README.md */,
 				04384BC9154A99B1001223C0 /* DNDAppDelegate.h */,
 				04384BCA154A99B1001223C0 /* DNDAppDelegate.m */,
 				04384BCC154A99B1001223C0 /* DNDViewController.h */,
@@ -161,6 +164,7 @@
 				04384BC5154A99B1001223C0 /* InfoPlist.strings in Resources */,
 				04384BD1154A99B1001223C0 /* DNDViewController_iPhone.xib in Resources */,
 				04384BD4154A99B1001223C0 /* DNDViewController_iPad.xib in Resources */,
+				04949BB215508935000C6D22 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,6 +53,7 @@ static CGSize TILESIZE;
             label.text = [NSString stringWithFormat:@"cell %d", row*COLS + col];
             emptyTile.moveable = NO;
             emptyTile.contentView = label;
+            emptyTile.tapDelegate = self;
         
             [grid addSubview:emptyTile];
             [tiles addObject:emptyTile];
@@ -170,5 +171,11 @@ static CGSize TILESIZE;
     }
 }
 
+
+#pragma mark - DNDTile tap delegate
+-(void) didTapTile:(DNDTile *)tile
+{
+    NSLog(@"did tap tile");
+}
 
 @end

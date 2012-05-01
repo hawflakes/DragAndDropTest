@@ -19,7 +19,7 @@ typedef enum
 
 @protocol DNDTileDraggingDelegate;
 @protocol DNDTileLocationDelegate;
-
+@protocol DNDTileTapDelegate;
 
 @interface DNDTile : UIView
 {
@@ -29,6 +29,7 @@ typedef enum
     NSIndexPath * indexPath;
     id<DNDTileLocationDelegate> locationDelegate;
     id<DNDTileDraggingDelegate> draggingDelegate;
+    id<DNDTileTapDelegate> tapDelegate;
 }
 
 @property (nonatomic, strong) UIColor * color;
@@ -36,14 +37,22 @@ typedef enum
 @property (nonatomic, strong) NSIndexPath * indexPath;
 @property (nonatomic, strong) id<DNDTileLocationDelegate> locationDelegate;
 @property (nonatomic, strong) id<DNDTileDraggingDelegate> draggingDelegate;
+@property (nonatomic, strong) id<DNDTileTapDelegate> tapDelegate;
+
 @property (nonatomic) BOOL moveable;
 @property (nonatomic) BOOL snapToGrid;
 
 @end
 
+@protocol DNDTileTapDelegate <NSObject>
+
+@required
+-(void) didTapTile:(DNDTile *) tile;
+
+@end
+
 
 @protocol DNDTileLocationDelegate <NSObject>
-
 @optional
 -(NSIndexPath *) tileIndexForPoint:(CGPoint) _point;
 -(DNDTile *) tileForIndexPath:(NSIndexPath *) _indexPath;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DNDTile.h"
 
-@interface DNDViewController : UIViewController<DNDTileLocationDelegate, DNDTileDraggingDelegate>
+@interface DNDViewController : UIViewController<DNDTileLocationDelegate, DNDTileDraggingDelegate, DNDTileTapDelegate>
 {
     NSMutableArray * tiles;
 }

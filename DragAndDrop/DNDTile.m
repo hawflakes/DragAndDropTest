@@ -15,6 +15,8 @@
 @synthesize indexPath;
 @synthesize draggingDelegate;
 @synthesize locationDelegate;
+@synthesize tapDelegate = _tapDelegate;
+
 @synthesize moveable = _moveable;
 @synthesize snapToGrid = _snapToGrid;
 
@@ -26,11 +28,23 @@
         color = [UIColor greenColor];
         _moveable = NO;
         _snapToGrid = NO;
+        draggingDelegate = nil;
+        locationDelegate = nil;
+        tapDelegate = nil;
+        
     }
     return self;
 }
 
-
+- (void)setTapDelegate:(id<DNDTileTapDelegate>)newTapDelegate
+{
+    self.tapDelegate = newTapDelegate;
+    UITapGestureRecognizer * tapRecog = [[UITapGestureRecognizer alloc] initWithTarget:tapDelegate action:@selector(didTapTile:)];
+    [tapRecog setNumberOfTapsRequired:1];
+    [tapRecog setNumberOfTouchesRequired:1];
+    [tapRecog setCancelsTouchesInView:NO];
+    [self addGestureRecognizer:tapRecog];
+}
 
 - (void)setContentView:(UIView *)newContentView {
     [contentView removeFromSuperview];
