@@ -7,10 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DNDViewController.h"
-
-
-
 
 typedef enum 
 {
@@ -19,35 +15,47 @@ typedef enum
     DNDPositionSnappedBack,
 } DNDPosition;
 
-@protocol DNDTileDraggingProtocol <NSObject>
-
-@optional
--(void) didStartDragging:(DNDTile*) tile;
--(void) isStillDragging:(DNDTile*) tile atIndexPath: (NSIndexPath *) indexPath;
--(void) didEndDragging:(DNDTile*) tile toPosition:(DNDPosition) position;
-
-@end
 
 
-@interface DNDTile : UIView<DNDTileDraggingProtocol>
+@protocol DNDTileDraggingDelegate;
+@protocol DNDTileLocationDelegate;
+
+
+@interface DNDTile : UIView
 {
     CGPoint touchStart;
     UIColor * color;
     UIView * contentView;
     NSIndexPath * indexPath;
     id<DNDTileLocationDelegate> locationDelegate;
-    id<DNDTileDraggingProtocol> draggingDelegate;
+    id<DNDTileDraggingDelegate> draggingDelegate;
 }
 
 @property (nonatomic, strong) UIColor * color;
 @property (nonatomic, retain) UIView *contentView;
 @property (nonatomic, strong) NSIndexPath * indexPath;
 @property (nonatomic, strong) id<DNDTileLocationDelegate> locationDelegate;
-@property (nonatomic, strong) id<DNDTileDraggingProtocol> draggingDelegate;
+@property (nonatomic, strong) id<DNDTileDraggingDelegate> draggingDelegate;
 @property (nonatomic) BOOL moveable;
 @property (nonatomic) BOOL snapToGrid;
 
+@end
 
 
+@protocol DNDTileLocationDelegate <NSObject>
 
+@optional
+-(NSIndexPath *) tileIndexForPoint:(CGPoint) _point;
+-(DNDTile *) tileForIndexPath:(NSIndexPath *) _indexPath;
+
+@property (nonatomic) UIView * view;
+@end
+
+
+@protocol DNDTileDraggingDelegate <NSObject>
+
+@optional
+-(void) didStartDragging:(DNDTile*) tile;
+-(void) isStillDragging:(DNDTile*) tile atIndexPath: (NSIndexPath *) indexPath;
+-(void) didEndDragging:(DNDTile*) tile toPosition:(DNDPosition) position;
 @end

@@ -20,7 +20,7 @@
 static CGSize TILESIZE;
 
 
--(UIView *) backgrounGrid
+-(UIView *) backgroundGrid
 {
     [tiles removeAllObjects];
     CGFloat gridHeight = 320;
@@ -33,8 +33,9 @@ static CGSize TILESIZE;
     
     const CGFloat colPadding = (gridWidth - (TILESIZE.width*COLS)) /(COLS+1);
     const CGFloat rowPadding = (gridHeight - (TILESIZE.height*ROWS)) /(ROWS+1);
-    //generate grid cells
     
+    
+    //generate grid cell
     for (int row = 0; row < ROWS; ++row) {
         for (int col = 0; col < COLS; ++col) {
             
@@ -68,11 +69,11 @@ static CGSize TILESIZE;
     tiles = [[NSMutableArray alloc] initWithCapacity:9];
     TILESIZE = CGSizeMake(90, 90);
     
-    [self.view addSubview:[self backgrounGrid]];
+    [self.view addSubview:[self backgroundGrid]];
     
     DNDTile * t = [[DNDTile alloc] initWithFrame:CGRectMake(5, 5, TILESIZE.width, TILESIZE.height)];
     t.locationDelegate = self;
-    t.draggingDelegate = t;
+    t.draggingDelegate = self;
     t.moveable = YES;
     t.snapToGrid = YES;
     [self.view addSubview:t];
@@ -109,7 +110,6 @@ static CGSize TILESIZE;
             return t.indexPath;
         }
     }
-    
     return nil;
 }
 
@@ -125,26 +125,50 @@ static CGSize TILESIZE;
 }
 
 
-/*****
- 
-
--(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+#pragma mark - DNDTile notifications
+-(void) didStartDragging:(DNDTile*) tile
 {
-    CGPoint startPoint = [[touches anyObject] locationInView:self.view];
-    NSLog(@"touchesBegan: @%@ touches.count=%d", NSStringFromCGPoint(startPoint), touches.count);
-
+    
 }
 
-
--(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+-(void) isStillDragging:(DNDTile*) tile atIndexPath:(NSIndexPath *) _indexPath
 {
-    NSLog(@"touchesMoved: touches.count=%d", touches.count);
+    UILabel * label = [[UILabel alloc] init];
+    
+    if (_indexPath)
+    {
+        NSLog(@"tile moved to iP:%d.%d", _indexPath.section, _indexPath.row);
+        label.text = [NSString stringWithFormat:@"cell %d.%d", _indexPath.section, _indexPath.row];
+        label.backgroundColor = [UIColor redColor];
+    } else {
+        label.text = [NSString stringWithFormat:@"no cell"];
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [UIColor blackColor];
+    }
+    tile.contentView = label;
+    
+    
 }
 
--(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+-(void) didEndDragging:(DNDTile*) tile toPosition:(DNDPosition) position
 {
-    NSLog(@"touchesEnded touches.count=%d", touches.count);    
+    if (position == DNDPositionNewCell) 
+    {
+        
+    } else if (position == DNDPositionSnappedBack)
+    {
+        UILabel * label = [[UILabel alloc] init];
+        label.text = [NSString stringWithFormat:@"oh SNAPPED back!"];
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [UIColor orangeColor];
+        tile.contentView = label;        
+    } else if (position == DNDPositionSameCell)
+    {
+        
+    } else {
+        NSLog(@"unknown position");
+    }
 }
-********/
+
 
 @end

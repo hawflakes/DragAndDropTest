@@ -7,18 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class DNDTile;
+#import "DNDTile.h"
 
-@protocol DNDTileLocationDelegate <NSObject>
-@optional
--(NSIndexPath *) tileIndexForPoint:(CGPoint) _point;
--(DNDTile *) tileForIndexPath:(NSIndexPath *) _indexPath;
-
-@property (nonatomic) UIView * view;
-@end
-
-
-@interface DNDViewController : UIViewController<DNDTileLocationDelegate>
+@interface DNDViewController : UIViewController<DNDTileLocationDelegate, DNDTileDraggingDelegate>
 {
     NSMutableArray * tiles;
 }
