@@ -92,6 +92,14 @@ static CGSize TILESIZE;
     }
 }
 
+
+-(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"VC touchesEnded touches.count=%d", touches.count);
+}
+
+#pragma mark - DNDTileLocationDelegate methods
+
 -(NSIndexPath *) tileIndexForPoint:(CGPoint) _point
 {
     for (DNDTile * t in tiles) {
@@ -115,10 +123,6 @@ static CGSize TILESIZE;
     return nil;
 }
 
--(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    NSLog(@"VC touchesEnded touches.count=%d", touches.count);
-}
 
 /*****
  

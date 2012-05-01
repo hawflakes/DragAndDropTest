@@ -15,13 +15,13 @@
     UIColor * color;
     UIView * contentView;
     NSIndexPath * indexPath;
-    DNDViewController * delegate;
+    id<DNDTileLocationDelegate> delegate;
 }
 
 @property (nonatomic, strong) UIColor * color;
 @property (nonatomic, retain) UIView *contentView;
 @property (nonatomic, strong) NSIndexPath * indexPath;
-@property (nonatomic, strong) DNDViewController * delegate;
+@property (nonatomic, strong) id<DNDTileLocationDelegate> delegate;
 @property (nonatomic) BOOL moveable;
 @property (nonatomic) BOOL snapToGrid;
 @end
