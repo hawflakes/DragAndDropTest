@@ -127,9 +127,10 @@
         if (ip)
         {
             NSLog(@"snap to iP:%d.%d", ip.section, ip.row);
+#if 0 
             label.text = [NSString stringWithFormat:@"cell %d.%d", ip.section, ip.row];
             label.backgroundColor = [UIColor redColor];
-            
+#endif            
             //snap to center of corresponding cell
             DNDTile * snapToMe = [_locationDelegate tileForIndexPath:ip];
             
