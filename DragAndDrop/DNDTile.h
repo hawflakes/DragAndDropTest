@@ -27,9 +27,11 @@ typedef enum
     UIColor * color;
     UIView * contentView;
     NSIndexPath * indexPath;
+#if 0
     id<DNDTileLocationDelegate> locationDelegate;
     id<DNDTileDraggingDelegate> draggingDelegate;
     id<DNDTileTapDelegate> tapDelegate;
+#endif
 }
 
 @property (nonatomic, strong) UIColor * color;

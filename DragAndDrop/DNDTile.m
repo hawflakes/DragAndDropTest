@@ -13,8 +13,8 @@
 @synthesize color;
 @synthesize contentView;
 @synthesize indexPath;
-@synthesize draggingDelegate;
-@synthesize locationDelegate;
+@synthesize draggingDelegate = _draggingDelegate;
+@synthesize locationDelegate = _locationDelegate;
 @synthesize tapDelegate = _tapDelegate;
 
 @synthesize moveable = _moveable;
@@ -25,21 +25,31 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        color = [UIColor greenColor];
+        //color = [UIColor greenColor];
         _moveable = NO;
         _snapToGrid = NO;
-        draggingDelegate = nil;
-        locationDelegate = nil;
-        tapDelegate = nil;
+        _draggingDelegate = nil;
+        _locationDelegate = nil;
+        _tapDelegate = nil;
         
     }
     return self;
 }
 
+-(void) setDraggingDelegate:(id<DNDTileDraggingDelegate>) newDraggingDelegate
+{
+    _draggingDelegate = newDraggingDelegate;
+}
+
+-(void) setLocationDelegate:(id<DNDTileLocationDelegate>) newLocationDelegate
+{
+    _locationDelegate = newLocationDelegate;
+}
+
 - (void)setTapDelegate:(id<DNDTileTapDelegate>)newTapDelegate
 {
-    tapDelegate = newTapDelegate;
-    UITapGestureRecognizer * tapRecog = [[UITapGestureRecognizer alloc] initWithTarget:tapDelegate action:@selector(didTapTile:)];
+    _tapDelegate = newTapDelegate;
+    UITapGestureRecognizer * tapRecog = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRouter:)];
     [tapRecog setNumberOfTapsRequired:1];
     [tapRecog setNumberOfTouchesRequired:1];
     [tapRecog setCancelsTouchesInView:NO];
@@ -62,12 +72,24 @@
 }
 
 
+-(void) tapRouter:(UIGestureRecognizer*) gestureRecognizer
+{
+    NSIndexPath * ip = [_locationDelegate tileIndexForPoint:[gestureRecognizer locationInView:_locationDelegate.view]];
+    
+    if (ip) {
+        DNDTile * tile = [_locationDelegate tileForIndexPath:ip];
+        [self.tapDelegate didTapTile:tile];
+    } else {
+        NSLog(@"error tap but don't know where to route to");
+    }
+}
+
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     touchStart = [[touches anyObject] locationInView:self];
     
-    if (draggingDelegate) {
-        [draggingDelegate didStartDragging:self];
+    if (_draggingDelegate) {
+        [_draggingDelegate didStartDragging:self];
     };
     
     NSLog(@"touchesBegan: %@ touches.count=%d", NSStringFromCGPoint(touchStart), touches.count);
@@ -84,12 +106,12 @@
     CGPoint point = [[touches anyObject] locationInView:self];
     self.center = CGPointMake(self.center.x + point.x - touchStart.x, self.center.y + point.y - touchStart.y);
     
-    if (locationDelegate)
+    if (_locationDelegate)
     {
-        NSIndexPath * ip = [locationDelegate tileIndexForPoint:[[touches anyObject] locationInView:locationDelegate.view] ];
-        if (draggingDelegate)
+        NSIndexPath * ip = [_locationDelegate tileIndexForPoint:[[touches anyObject] locationInView:_locationDelegate.view] ];
+        if (_draggingDelegate)
         {
-            [draggingDelegate isStillDragging:self atIndexPath:ip];
+            [_draggingDelegate isStillDragging:self atIndexPath:ip];
         }
     }
 
@@ -98,8 +120,8 @@
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"touchesEnded touches.count=%d", touches.count);
-    if (_moveable && _snapToGrid && locationDelegate) {
-        NSIndexPath * ip = [locationDelegate tileIndexForPoint:[[touches anyObject] locationInView:locationDelegate.view] ];
+    if (_moveable && _snapToGrid && _locationDelegate) {
+        NSIndexPath * ip = [_locationDelegate tileIndexForPoint:[[touches anyObject] locationInView:_locationDelegate.view] ];
         UILabel * label = [[UILabel alloc] init];
         
         if (ip)
@@ -109,20 +131,20 @@
             label.backgroundColor = [UIColor redColor];
             
             //snap to center of corresponding cell
-            DNDTile * snapToMe = [locationDelegate tileForIndexPath:ip];
+            DNDTile * snapToMe = [_locationDelegate tileForIndexPath:ip];
             
             [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
                 self.center = snapToMe.center;
             } completion:^(BOOL finished) {
                 NSLog(@"done snapping");
                 
-                if (draggingDelegate) 
+                if (_draggingDelegate) 
                 {
                     if ((self.indexPath.section == ip.section)&&(self.indexPath.row == ip.row))
                     {
-                        [draggingDelegate didEndDragging:self toPosition:DNDPositionSameCell];
+                        [_draggingDelegate didEndDragging:self toPosition:DNDPositionSameCell];
                     } else {
-                        [draggingDelegate didEndDragging:self toPosition:DNDPositionNewCell];
+                        [_draggingDelegate didEndDragging:self toPosition:DNDPositionNewCell];
                     }
                 }
                 self.indexPath = ip;
@@ -131,15 +153,15 @@
             
         } else if (self.indexPath) {
             //snap to last cell...
-            DNDTile * snapBack = [locationDelegate tileForIndexPath:self.indexPath];
+            DNDTile * snapBack = [_locationDelegate tileForIndexPath:self.indexPath];
             
             [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
                 self.center = snapBack.center;
             } completion:^(BOOL finished) {
                 NSLog(@"done snapping BACK");
-                if (draggingDelegate) 
+                if (_draggingDelegate) 
                 {
-                    [draggingDelegate didEndDragging:self toPosition:DNDPositionSnappedBack];
+                    [_draggingDelegate didEndDragging:self toPosition:DNDPositionSnappedBack];
                 }; 
             }];
 
