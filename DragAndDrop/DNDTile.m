@@ -108,7 +108,7 @@
     
     if (_locationDelegate)
     {
-        NSIndexPath * ip = [_locationDelegate tileIndexForPoint:[[touches anyObject] locationInView:_locationDelegate.view] ];
+        NSIndexPath * ip = [_locationDelegate backgroundTileIndexForPoint:[[touches anyObject] locationInView:_locationDelegate.view] ];
         if (_draggingDelegate)
         {
             [_draggingDelegate isStillDragging:self atIndexPath:ip];
@@ -121,23 +121,19 @@
 {
     NSLog(@"touchesEnded touches.count=%d", touches.count);
     if (_moveable && _snapToGrid && _locationDelegate) {
-        NSIndexPath * ip = [_locationDelegate tileIndexForPoint:[[touches anyObject] locationInView:_locationDelegate.view] ];
-        UILabel * label = [[UILabel alloc] init];
+        NSIndexPath * ip = [_locationDelegate backgroundTileIndexForPoint:[[touches anyObject] locationInView:_locationDelegate.view] ];
         
         if (ip)
         {
             NSLog(@"snap to iP:%d.%d", ip.section, ip.row);
-#if 0 
-            label.text = [NSString stringWithFormat:@"cell %d.%d", ip.section, ip.row];
-            label.backgroundColor = [UIColor redColor];
-#endif            
             //snap to center of corresponding cell
-            DNDTile * snapToMe = [_locationDelegate tileForIndexPath:ip];
+            DNDTile * snapToMe = [_locationDelegate backgroundTileForIndexPath:ip];
             
             [UIView animateWithDuration:0.1 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
                 self.center = snapToMe.center;
             } completion:^(BOOL finished) {
                 NSLog(@"done snapping");
+                self.indexPath = ip;
                 
                 if (_draggingDelegate) 
                 {
@@ -148,8 +144,6 @@
                         [_draggingDelegate didEndDragging:self toPosition:DNDPositionNewCell];
                     }
                 }
-                self.indexPath = ip;
-                self.contentView = label;
             }];
             
         } else if (self.indexPath) {

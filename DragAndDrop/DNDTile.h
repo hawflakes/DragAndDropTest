@@ -57,7 +57,10 @@ typedef enum
 @protocol DNDTileLocationDelegate <NSObject>
 @optional
 -(NSIndexPath *) tileIndexForPoint:(CGPoint) _point;
+-(NSIndexPath *) backgroundTileIndexForPoint:(CGPoint) _point;
+
 -(DNDTile *) tileForIndexPath:(NSIndexPath *) _indexPath;
+-(DNDTile *) backgroundTileForIndexPath:(NSIndexPath *) _indexPath;
 
 @property (nonatomic) UIView * view;
 @end
